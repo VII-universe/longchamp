@@ -29,8 +29,9 @@ const RunnerCursor = () => {
       if (!rafRef.current) {
         rafRef.current = requestAnimationFrame(() => {
           if (wrapRef.current) {
+            // Offset 14px right and 16px below the cursor tip so native arrow stays visible
             wrapRef.current.style.transform =
-              `translate(${posRef.current.x - 32}px, ${posRef.current.y - 32}px)`;
+              `translate(${posRef.current.x + 14}px, ${posRef.current.y + 16}px)`;
           }
           rafRef.current = null;
         });
@@ -47,12 +48,13 @@ const RunnerCursor = () => {
         position: 'fixed',
         top: 0,
         left: 0,
-        width: 64,
-        height: 64,
+        width: 56,
+        height: 56,
         pointerEvents: 'none',
         zIndex: 99999,
         willChange: 'transform',
-        filter: 'drop-shadow(0 0 8px #6AF9A9) hue-rotate(0deg) saturate(5)',
+        // Convert white Lottie figure to site neon green (#6AF9A9)
+        filter: 'brightness(0) saturate(100%) invert(82%) sepia(40%) saturate(500%) hue-rotate(105deg) brightness(1.05)',
       }}
     >
       <DotLottieReact
@@ -303,7 +305,7 @@ const App = () => {
   const scrollX = useTransform(infoProgress, [0, 1], ["20%", "-40%"]);
 
   return (
-    <div className="min-h-screen bg-asphalt-dark text-white selection:bg-neon-green selection:text-black" style={{ cursor: 'none' }}>
+    <div className="min-h-screen bg-asphalt-dark text-white selection:bg-neon-green selection:text-black">
       <RunnerCursor />
       <Navbar onOpenReg={() => setActiveModal('registration')} />
       
