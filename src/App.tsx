@@ -53,8 +53,8 @@ const RunnerCursor = () => {
         pointerEvents: 'none',
         zIndex: 99999,
         willChange: 'transform',
-        // #6AF9A9: sepia baseline ~35° + hue-rotate 116° = ~151° (mint green)
-        filter: 'brightness(0) invert(1) sepia(1) saturate(600%) hue-rotate(116deg) brightness(1.1)',
+        // Work from actual canvas render colors, not from forced black
+        filter: 'sepia(1) saturate(8) hue-rotate(95deg) brightness(1.25)',
       }}
     >
       <DotLottieReact
