@@ -208,7 +208,7 @@ const SectionHeading = ({ children, subtitle }: { children: React.ReactNode; sub
 // --- Main App ---
 
 const App = () => {
-  const [activeModal, setActiveModal] = useState<'registration' | 'map' | 'merch' | null>(null);
+  const [activeModal, setActiveModal] = useState<'registration' | 'map' | 'merch' | 'gdpr' | null>(null);
   const [selectedMerch, setSelectedMerch] = useState<any>(null);
 
   const infoRef = React.useRef(null);
@@ -235,7 +235,7 @@ const App = () => {
                initial={{ opacity: 0, y: 40 }}
                whileInView={{ opacity: 1, y: 0 }}
                transition={{ duration: 1 }}
-               className="relative h-[600px] lg:h-[450px] overflow-hidden bg-asphalt border border-white/10 group rounded-3xl shadow-2xl transition-colors duration-700 hover:bg-black cursor-pointer"
+               className="relative h-[600px] lg:h-[450px] overflow-hidden bg-asphalt border border-white/10 group shadow-2xl transition-colors duration-700 hover:bg-black cursor-pointer"
                onClick={() => document.getElementById('prize')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <div className="flex flex-col lg:flex-row h-full">
@@ -249,7 +249,7 @@ const App = () => {
                     >
                        <img 
                          src="/assets/enyaq.png" 
-                         className="w-full h-full object-contain p-8 lg:p-12 grayscale group-hover:grayscale-0 brightness-[0.5] group-hover:brightness-100 transition-all duration-1000" 
+                         className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 brightness-[0.5] group-hover:brightness-100 transition-all duration-1000" 
                          alt="Skoda Enyaq Prize" 
                        />
                     </motion.div>
@@ -638,7 +638,7 @@ const App = () => {
             <div className="flex gap-8 text-xs font-bold uppercase text-gray-500 tracking-widest">
               <button onClick={() => setActiveModal('registration')} className="hover:text-neon-green">Registrace</button>
               <button onClick={() => setActiveModal('map')} className="hover:text-neon-green">Trasa</button>
-              <a href="#" className="hover:text-neon-green">GDPR</a>
+              <button onClick={() => setActiveModal('gdpr')} className="hover:text-neon-green">GDPR</button>
             </div>
             <p className="text-[10px] text-gray-600 font-black tracking-widest">&copy; 2026 LONG RUNNERS CHAMPION</p>
           </div>
@@ -660,6 +660,11 @@ const App = () => {
         {activeModal === 'merch' && selectedMerch && (
           <Modal close={() => { setActiveModal(null); setSelectedMerch(null); }} title="OBJEDNÁVKA MERCHE">
             <MerchOrderContent item={selectedMerch} />
+          </Modal>
+        )}
+        {activeModal === 'gdpr' && (
+          <Modal close={() => setActiveModal(null)} title="ZÁSADY OCHRANY OSOBNÍCH ÚDAJŮ (GDPR)">
+            <GdprContent />
           </Modal>
         )}
       </AnimatePresence>
@@ -1013,6 +1018,57 @@ const MerchOrderContent = ({ item }: { item: any }) => {
              </button>
           </form>
        </div>
+    </div>
+  );
+};
+
+const GdprContent = () => {
+  return (
+    <div className="space-y-6 text-sm text-gray-300 leading-relaxed font-bold max-h-[60vh] overflow-y-auto pr-4 custom-scrollbar">
+      <div className="p-4 border-l-4 border-neon-green bg-white/5 mb-8">
+        <p className="text-white font-black uppercase tracking-widest text-xs">Vaše soukromí je pro nás prioritou. Přečtěte si, jak nakládáme s vašimi osobními údaji.</p>
+      </div>
+
+      <section className="space-y-2">
+        <h3 className="text-xl font-display font-black italic text-neon-green uppercase border-b border-white/10 pb-2 mb-4">1. Správce údajů</h3>
+        <p>
+          Správcem vašich osobních údajů je organizátor závodu LONG RUNNERS CHAMPION 2026. Údaje zpracováváme v souladu s Nařízením Evropského parlamentu a Rady (EU) 2016/679 (GDPR).
+        </p>
+      </section>
+
+      <section className="space-y-2">
+        <h3 className="text-xl font-display font-black italic text-neon-green uppercase border-b border-white/10 pb-2 mb-4">2. Jaké údaje sbíráme</h3>
+        <ul className="list-disc pl-5 space-y-1">
+          <li><strong>Identifikační údaje:</strong> Jméno, příjmení, datum narození, adresa.</li>
+          <li><strong>Kontaktní údaje:</strong> E-mailová adresa, telefonní číslo pro stav nouze.</li>
+          <li><strong>Zdravotní a další údaje:</strong> Závodní kategorie, velikost trička, případná omezení uvedená v registraci.</li>
+        </ul>
+      </section>
+
+      <section className="space-y-2">
+        <h3 className="text-xl font-display font-black italic text-neon-green uppercase border-b border-white/10 pb-2 mb-4">3. Účel zpracování</h3>
+        <p>
+          Osobní údaje zpracováváme výhradně pro účely:
+        </p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Registrace k závodu a přidělení startovního čísla.</li>
+          <li>Komunikace týkající se harmonogramu, změn a výsledků.</li>
+          <li>Zajištění bezpečnosti a zdraví během konání akce.</li>
+          <li>Zpracování a distribuce zakoupeného merchandise.</li>
+        </ul>
+      </section>
+
+      <section className="space-y-2">
+        <h3 className="text-xl font-display font-black italic text-neon-green uppercase border-b border-white/10 pb-2 mb-4">4. Doba uchování a vaše práva</h3>
+        <p>
+          Údaje uchováváme pouze po dobu nezbytně nutnou, maximálně však 2 roky po skončení závodu pro účely archivace výsledků (nepožádáte-li o dřívější výmaz). 
+          Máte právo požadovat přístup, opravu, nebo výmaz vašich údajů, jakož i právo podat stížnost u ÚOOÚ.
+        </p>
+      </section>
+
+      <div className="mt-8 pt-8 border-t border-white/10">
+        <p className="text-xs text-white/50 uppercase tracking-widest text-center">Poslední aktualizace: Duben 2026</p>
+      </div>
     </div>
   );
 };
