@@ -824,23 +824,82 @@ const RegistrationForm = () => {
   );
 };
 
+const routesData = {
+  '5km': {
+    title: 'MAPA TRASY 5 KM CHARITA',
+    pathAnimation: { end: 0.08, duration: 2 },
+    checkpoints: [
+      { name: 'CP1 - START/CÍL (HOLEŠOVICE)', km: '2.5 KM', info: 'Voda, Iontový nápoj, Zdravotník' },
+    ],
+    specs: { elevation: '45 M+', surface: '100% ASFALT / DLAŽBA', limit: '1:00 HOD', category: 'CHARITA' },
+    warning: 'Pozor: Charitativní běh vede částečně přes Stromovku. Trasa je rovinatá a vhodná pro všechny.'
+  },
+  '31km': {
+    title: 'MAPA TRASY 31+31 KM ŠTAFETA',
+    pathAnimation: { end: 0.5, duration: 4 },
+    checkpoints: [
+      { name: 'CP1 - PETŘÍN HILL', km: '12 KM', info: 'Voda, Ionty, Gely, Zdravotník' },
+      { name: 'CP2 - VYŠEHRAD (PŘEDÁVKA)', km: '31 KM', info: 'Banány, Vývar, Masáže, Předávková zóna' },
+    ],
+    specs: { elevation: '680 M+', surface: '85% ASFALT', limit: '4:00 HOD (na člena)', category: 'TÝMOVÁ ŠTAFETA' },
+    warning: 'Pozor: Místo předávky na Vyšehradě je velmi frekventované. Sledujte značení koridorů pro svůj tým.'
+  },
+  '62km': {
+    title: 'MAPA TRASY 62 KM ULTRA',
+    pathAnimation: { end: 1, duration: 6 },
+    checkpoints: [
+      { name: 'CP1 - PETŘÍN HILL', km: '12 KM', info: 'Voda, Ionty, Gely, Zdravotník' },
+      { name: 'CP2 - VYŠEHRAD FORTRESS', km: '28 KM', info: 'Banány, Vývar, Teplý čaj, Masáže' },
+      { name: 'CP3 - TROMJA ARENA', km: '45 KM', info: 'Espresso Bar, Energy Tyčinky, Magnesium' },
+      { name: 'CP4 - RIEGROVY SADY', km: '56 KM', info: 'Final Boost, Cola, Pivo (nealko), Hudba' },
+    ],
+    specs: { elevation: '1 250 M+', surface: '80% ASFALT', limit: '8:00 HOD', category: 'ULTRA ELITE' },
+    warning: 'Pozor: Trasa vede historickým centrem přes kočičí hlavy a úzké uličky. Doporučujeme obuv s dobrou trakcí i na mokrém asfaltu.'
+  }
+};
+
 const RaceMapContent = () => {
+  const [activeRoute, setActiveRoute] = useState<'5km' | '31km' | '62km'>('62km');
+  const route = routesData[activeRoute];
+
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
+      {/* Tab Selector */}
+      <div className="flex flex-wrap gap-4 border-b border-white/10 pb-4">
+        {[
+          { id: '5km', label: '5 KM CHARITA' },
+          { id: '31km', label: '31+31 KM ŠTAFETA' },
+          { id: '62km', label: '62 KM ULTRA' },
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveRoute(tab.id as '5km' | '31km' | '62km')}
+            className={`px-6 py-3 font-black uppercase text-sm italic transition-all ${
+              activeRoute === tab.id 
+              ? 'bg-neon-green text-black scale-105' 
+              : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       <div className="aspect-video bg-black/50 border border-white/10 relative overflow-hidden group">
          <img 
            src="/assets/prague_map.png" 
-           className="absolute inset-0 w-full h-full object-cover saturate-50 brightness-[0.4] group-hover:scale-105 transition-transform duration-[2000ms]" 
+           className="absolute inset-0 w-full h-full object-cover saturate-50 brightness-[0.4]" 
            alt="Prague Race Map"
          />
          
-         {/* Animated Path Overlay (The "Running" Effect) - Refined Street Path */}
+         {/* Animated Path Overlay */}
          <svg 
            viewBox="0 0 1000 1000" 
            className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_0_15px_rgba(106,249,169,0.8)] opacity-70"
            preserveAspectRatio="none"
          >
             <motion.path
+               key={`glow-${activeRoute}`}
                d="M500,250 L520,240 L550,220 L600,230 L640,200 L700,220 L750,280 L720,350 L680,450 L650,550 L630,680 L580,750 L520,850 L450,920 L380,850 L320,750 L280,650 L250,550 L220,450 L180,350 L150,280 L200,220 L250,230 L350,220 L450,240 Z"
                fill="none"
                stroke="#6AF9A9"
@@ -848,9 +907,9 @@ const RaceMapContent = () => {
                strokeLinecap="round"
                strokeLinejoin="round"
                initial={{ pathLength: 0, opacity: 0 }}
-               animate={{ pathLength: 1, opacity: 1 }}
+               animate={{ pathLength: route.pathAnimation.end, opacity: 1 }}
                transition={{ 
-                duration: 6, 
+                duration: route.pathAnimation.duration, 
                 ease: "linear",
                 repeat: Infinity,
                 repeatType: "loop",
@@ -859,15 +918,16 @@ const RaceMapContent = () => {
             />
             {/* Bright leading edge */}
             <motion.path
+               key={`edge-${activeRoute}`}
                d="M500,250 L520,240 L550,220 L600,230 L640,200 L700,220 L750,280 L720,350 L680,450 L650,550 L630,680 L580,750 L520,850 L450,920 L380,850 L320,750 L280,650 L250,550 L220,450 L180,350 L150,280 L200,220 L250,230 L350,220 L450,240 Z"
                fill="none"
                stroke="white"
                strokeWidth="4"
                strokeLinecap="round"
                initial={{ pathLength: 0, opacity: 0 }}
-               animate={{ pathLength: 1, opacity: 1 }}
+               animate={{ pathLength: route.pathAnimation.end, opacity: 1 }}
                transition={{ 
-                duration: 6, 
+                duration: route.pathAnimation.duration, 
                 ease: "linear",
                 repeat: Infinity,
                 repeatType: "loop",
@@ -878,62 +938,74 @@ const RaceMapContent = () => {
 
          <div className="absolute inset-0 bg-gradient-to-t from-asphalt-dark/90 to-transparent pointer-events-none"></div>
          <div className="absolute top-4 left-4 bg-black/80 p-4 border-l-4 border-neon-green backdrop-blur-md">
-            <h4 className="text-sm font-black uppercase text-white tracking-widest">MAPA TRASY 62 KM</h4>
+            <h4 className="text-sm font-black uppercase text-white tracking-widest">{route.title}</h4>
             <p className="text-[10px] text-neon-green font-bold uppercase italic animate-pulse">AKTIVNÍ SIMULACE BĚHU...</p>
          </div>
          <div className="absolute bottom-4 right-4 text-[8px] text-white/30 font-bold uppercase tracking-[0.3em]">
             © 2026 Long Runners Champion
          </div>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
            <h4 className="text-xl font-display font-black text-neon-green italic uppercase mb-6 flex items-center gap-2"><Coffee size={24}/> Občerstvovačky (CP)</h4>
-           <div className="space-y-3">
-              {[
-                { name: 'CP1 - PETŘÍN HILL', km: '12 KM', info: 'Voda, Ionty, Gely, Zdravotník' },
-                { name: 'CP2 - VYŠEHRAD FORTRESS', km: '28 KM', info: 'Banány, Vývar, Teplý čaj, Masáže' },
-                { name: 'CP3 - TROMJA ARENA', km: '45 KM', info: 'Espresso Bar, Energy Tyčinky, Magnesium' },
-                { name: 'CP4 - RIEGROVY SADY', km: '56 KM', info: 'Final Boost, Cola, Pivo (nealko), Hudba' },
-              ].map((cp, i) => (
-                <div key={i} className="p-4 bg-white/5 border-l-2 border-white/10 hover:border-neon-green transition-colors">
+           <div className="space-y-3 min-h-[300px]">
+              {route.checkpoints.map((cp, i) => (
+                <motion.div 
+                  key={`${activeRoute}-cp-${i}`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="p-4 bg-white/5 border-l-2 border-white/10 hover:border-neon-green transition-colors"
+                >
                    <div className="flex justify-between items-center mb-1">
                       <span className="font-bold uppercase text-xs tracking-wider">{cp.name}</span>
                       <span className="text-neon-green font-display font-black italic">{cp.km}</span>
                    </div>
                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-tight">{cp.info}</p>
-                </div>
+                </motion.div>
               ))}
            </div>
         </div>
         <div className="space-y-8">
            <div>
               <h4 className="text-xl font-display font-black text-white italic uppercase mb-6 flex items-center gap-2"><List size={24} className="text-neon-green" /> Technické Parametry</h4>
-              <div className="p-6 bg-white/5 border border-white/10 space-y-4">
+              <motion.div 
+                 key={`specs-${activeRoute}`}
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1 }}
+                 className="p-6 bg-white/5 border border-white/10 space-y-4"
+              >
                  <div className="grid grid-cols-2 gap-4">
                    <div>
                      <p className="text-[8px] text-gray-500 font-bold uppercase tracking-widest mb-1">Převýšení</p>
-                     <p className="text-xl font-black italic text-glow">1 250 M+</p>
+                     <p className="text-xl font-black italic text-glow">{route.specs.elevation}</p>
                    </div>
                    <div>
                      <p className="text-[8px] text-gray-500 font-bold uppercase tracking-widest mb-1">Povrch</p>
-                     <p className="text-xl font-black italic">80% ASFALT</p>
+                     <p className="text-xl font-black italic">{route.specs.surface}</p>
                    </div>
                    <div>
                      <p className="text-[8px] text-gray-500 font-bold uppercase tracking-widest mb-1">Časový Limit</p>
-                     <p className="text-xl font-black italic">8:00 HOD</p>
+                     <p className="text-xl font-black italic">{route.specs.limit}</p>
                    </div>
                    <div>
                      <p className="text-[8px] text-gray-500 font-bold uppercase tracking-widest mb-1">Kategorie</p>
-                     <p className="text-xl font-black italic">ULTRA ELITE</p>
+                     <p className="text-xl font-black italic">{route.specs.category}</p>
                    </div>
                  </div>
-              </div>
+              </motion.div>
            </div>
-           <div className="p-4 bg-neon-green/5 border border-neon-green/20">
+           <motion.div 
+             key={`warning-${activeRoute}`}
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 1 }}
+             className="p-4 bg-neon-green/5 border border-neon-green/20"
+           >
               <p className="text-[10px] text-white/50 font-bold uppercase leading-relaxed">
-                 Pozor: Trasa vede historickým centrem přes kočičí hlavy a úzké uličky. Doporučujeme obuv s dobrou trakcí i na mokrém asfaltu.
+                 {route.warning}
               </p>
-           </div>
+           </motion.div>
         </div>
       </div>
     </div>
