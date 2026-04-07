@@ -973,7 +973,7 @@ const routesData = {
   },
   '31km': {
     title: 'MAPA TRASY 31+31 KM ŠTAFETA',
-    path: "M500,200 L650,300 L750,500 L650,700 L500,800 L350,700 L250,500 L350,300 Z",
+    path: "M500,250 H450 V280 H400 V350 H350 V450 H300 V550 H350 V650 H450 V800 H500 V850 H550 V750 H550 V600 H600 V450 H550 V300 H500 V250 Z",
     pathAnimation: { duration: 5 },
     checkpoints: [
       { name: 'CP1 - PETŘÍN HILL', km: '12 KM', info: 'Voda, Ionty, Gely, Zdravotník' },
@@ -984,7 +984,7 @@ const routesData = {
   },
   '62km': {
     title: 'MAPA TRASY 62 KM ULTRA',
-    path: "M500,100 L700,200 L850,400 L800,650 L650,850 L500,950 L350,850 L200,650 L150,400 L300,200 Z",
+    path: "M500,250 H350 V300 H300 V450 L250,500 V650 H400 V800 H500 V900 H650 V850 H750 V700 H780 V550 H700 V450 H650 V350 H700 V200 H800 V150 H650 V120 H550 V200 H500 V250 Z",
     pathAnimation: { duration: 8 },
     checkpoints: [
       { name: 'CP1 - PETŘÍN HILL', km: '12 KM', info: 'Voda, Ionty, Gely, Zdravotník' },
