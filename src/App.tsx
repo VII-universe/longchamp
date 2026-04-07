@@ -595,10 +595,10 @@ const App = () => {
                <div className="lg:w-2/3">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {[
-                      { name: 'Survivor Tee', price: '890 Kč', tag: 'Elite', img: '/assets/merch_feature.png', info: 'Funkční triko s antibakteriální úpravou a reflexními prvky.' },
-                      { name: 'Finisher Hoodie', price: '1 590 Kč', tag: 'Preorder', img: '/assets/merch_feature.png', info: 'Těžká gramáž, vnitřní počes, neonové výšivky.' },
-                      { name: 'Race Cap', price: '450 Kč', tag: 'Pro', img: '/assets/merch_feature.png', info: 'Ultra lehká, s odvětráváním a stavitelným páskem.' },
-                      { name: 'Training Vest', price: '1 290 Kč', tag: 'New', img: '/assets/merch_feature.png', info: 'Větruodolná, s kapsou na mobil a gely.' },
+                      { name: 'Survivor Tee', price: '890 Kč', tag: 'Elite', img: '/assets/merch_tee.png', info: 'Funkční triko s antibakteriální úpravou a reflexními prvky.' },
+                      { name: 'Finisher Hoodie', price: '1 590 Kč', tag: 'Preorder', img: '/assets/merch_hoodie.png', info: 'Těžká gramáž, vnitřní počes, neonové výšivky.' },
+                      { name: 'Race Cap', price: '450 Kč', tag: 'Pro', img: '/assets/merch_cap.png', info: 'Ultra lehká, s odvětráváním a stavitelným páskem.' },
+                      { name: 'Training Vest', price: '1 290 Kč', tag: 'New', img: '/assets/merch_vest.png', info: 'Větruodolná, s kapsou na mobil a gely.' },
                     ].map((item, i) => (
                       <motion.div 
                         key={i}
