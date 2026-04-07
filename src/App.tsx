@@ -53,8 +53,8 @@ const RunnerCursor = () => {
         pointerEvents: 'none',
         zIndex: 99999,
         willChange: 'transform',
-        // Precise CSS filter to hit exactly #6AF9A9 (from white Lottie figure)
-        filter: 'invert(84%) sepia(32%) saturate(1076%) hue-rotate(98deg) brightness(102%) contrast(97%)',
+        // #6AF9A9: sepia baseline ~35° + hue-rotate 116° = ~151° (mint green)
+        filter: 'brightness(0) invert(1) sepia(1) saturate(600%) hue-rotate(116deg) brightness(1.1)',
       }}
     >
       <DotLottieReact
