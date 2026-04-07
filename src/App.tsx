@@ -194,13 +194,45 @@ const Hero = ({ onOpenReg, onOpenMap }: { onOpenReg: () => void; onOpenMap: () =
   );
 };
 
+const TextReveal = ({ text }: { text: string }) => {
+  const words = text.split(" ");
+  return (
+    <motion.span
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+      className="inline-block"
+    >
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          className="inline-block mr-[0.25em]"
+          variants={{
+            hidden: { opacity: 0, scale: 0.8, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.4, ease: "backOut" } }
+          }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
+
 const SectionHeading = ({ children, subtitle }: { children: React.ReactNode; subtitle?: string }) => (
-  <div className="mb-16">
+  <div className="mb-16 block">
     {subtitle && <span className="text-neon-green font-black uppercase tracking-[0.3em] text-xs block mb-4">{subtitle}</span>}
     <h2 className="text-4xl md:text-6xl font-display font-black italic">
-       {children}
+       {typeof children === 'string' ? <TextReveal text={children} /> : children}
     </h2>
-    <div className="w-24 h-1.5 bg-neon-green mt-2"></div>
+    <motion.div 
+      initial={{ scaleX: 0 }} 
+      whileInView={{ scaleX: 1 }} 
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.3 }}
+      className="w-24 h-1.5 bg-neon-green mt-4 origin-left"
+    ></motion.div>
   </div>
 );
 
@@ -366,8 +398,23 @@ const App = () => {
         <section id="races" className="py-24 relative overflow-hidden">
           <div className="container mx-auto px-6">
             <SectionHeading subtitle="Najdi svou výzvu">ZÁVODNÍ KATEGORIE</SectionHeading>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="relative group overflow-hidden bg-black h-[600px] border border-white/10">
+            <motion.div 
+              className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={{
+                visible: { transition: { staggerChildren: 0.2 } },
+                hidden: {}
+              }}
+            >
+              <motion.div 
+                 variants={{
+                   hidden: { opacity: 0, y: 80, scale: 0.95 },
+                   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: "easeOut" } }
+                 }}
+                 className="relative group overflow-hidden bg-black h-[600px] border border-white/10"
+              >
                 <div className="absolute inset-0 z-0">
                   <img src="/assets/ultra_race.png" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Ultra 62k" />
                 </div>
@@ -377,9 +424,15 @@ const App = () => {
                   <h3 className="text-5xl font-black mb-4 uppercase leading-none">62 KM <br />ULTRA</h3>
                   <button onClick={() => setActiveModal('map')} className="w-full py-4 border border-white/20 hover:bg-white hover:text-black font-black transition-all">DETAIL TRASY</button>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="relative group overflow-hidden bg-black h-[600px] border border-white/10">
+              <motion.div 
+                 variants={{
+                   hidden: { opacity: 0, y: 80, scale: 0.95 },
+                   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: "easeOut" } }
+                 }}
+                 className="relative group overflow-hidden bg-black h-[600px] border border-white/10"
+              >
                 <div className="absolute inset-0 z-0">
                   <img src="/assets/relay_race.png" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-[0.4] group-hover:scale-105 transition-transform duration-700" alt="Relay" />
                 </div>
@@ -388,9 +441,15 @@ const App = () => {
                   <h3 className="text-5xl font-black mb-4 uppercase leading-none">31+31 KM <br />ŠTAFETA</h3>
                   <button onClick={() => setActiveModal('registration')} className="w-full py-4 border border-white/20 hover:bg-neon-green hover:text-black font-black transition-all">REGISTROVAT TÝM</button>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="relative group overflow-hidden bg-black h-[600px] border border-white/10">
+              <motion.div 
+                 variants={{
+                   hidden: { opacity: 0, y: 80, scale: 0.95 },
+                   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: "easeOut" } }
+                 }}
+                 className="relative group overflow-hidden bg-black h-[600px] border border-white/10"
+              >
                 <div className="absolute inset-0 z-0">
                   <img src="/assets/charity_run.png" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Charity" />
                 </div>
@@ -400,10 +459,30 @@ const App = () => {
                   <h3 className="text-5xl font-black mb-4 uppercase leading-none">CHARITA <br />5 KM</h3>
                   <button onClick={() => setActiveModal('registration')} className="w-full py-4 bg-white text-black font-black transition-all">PŘIPOJIT SE</button>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
+
+        {/* Animated Marquee Ticker */}
+        <div className="bg-neon-green py-4 overflow-hidden flex items-center border-y border-black">
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+            className="flex gap-8 font-black uppercase tracking-widest text-black text-xl whitespace-nowrap"
+          >
+            {[...Array(8)].map((_, i) => (
+              <span key={i} className="flex gap-8 items-center">
+                <span>LONG RUNNERS CHAMPION 2026</span>
+                <span>///</span>
+                <span>CZECH REPUBLIC</span>
+                <span>///</span>
+                <span>THE ULTIMATE CHALLENGE</span>
+                <span>///</span>
+              </span>
+            ))}
+          </motion.div>
+        </div>
 
         {/* Expo */}
         <section id="expo" className="relative bg-asphalt-dark overflow-hidden min-h-[700px] flex items-center border-none">
@@ -521,8 +600,9 @@ const App = () => {
                     ].map((item, i) => (
                       <motion.div 
                         key={i}
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        whileHover={{ scale: 1.02, rotate: 1, y: -5, boxShadow: "0px 20px 40px rgba(106, 249, 169, 0.15)" }}
                         transition={{ duration: 0.5, delay: i * 0.1 }}
                         className="bg-white/5 border border-white/10 group overflow-hidden flex flex-col"
                       >
@@ -597,8 +677,9 @@ const App = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-center"
+                  whileHover={{ scale: 1.05, rotate: -2 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center cursor-pointer"
                 >
                    <h3 className="text-white text-6xl md:text-[10rem] font-display font-black italic uppercase drop-shadow-[0_10px_50px_rgba(0,0,0,0.8)] leading-none mb-4">
                       ŠKODA <br /> <span className="text-neon-green">ENYAQ</span>
