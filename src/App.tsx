@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { 
   Timer, 
@@ -13,6 +13,57 @@ import {
   List,
   ArrowRight
 } from 'lucide-react';
+
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+// --- Custom Lottie Runner Cursor ---
+
+const RunnerCursor = () => {
+  const posRef = useRef({ x: -300, y: -300 });
+  const rafRef = useRef<number | null>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      posRef.current = { x: e.clientX, y: e.clientY };
+      if (!rafRef.current) {
+        rafRef.current = requestAnimationFrame(() => {
+          if (wrapRef.current) {
+            wrapRef.current.style.transform =
+              `translate(${posRef.current.x - 32}px, ${posRef.current.y - 32}px)`;
+          }
+          rafRef.current = null;
+        });
+      }
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+
+  return (
+    <div
+      ref={wrapRef}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: 64,
+        height: 64,
+        pointerEvents: 'none',
+        zIndex: 99999,
+        willChange: 'transform',
+        filter: 'drop-shadow(0 0 8px #6AF9A9) hue-rotate(0deg) saturate(5)',
+      }}
+    >
+      <DotLottieReact
+        src="https://lottie.host/659f7254-229a-4c4d-bf74-017e28599c72/YMCvFFpjuP.lottie"
+        loop
+        autoplay
+        style={{ width: '100%', height: '100%' }}
+      />
+    </div>
+  );
+};
 
 // --- Helper Components ---
 
@@ -252,7 +303,8 @@ const App = () => {
   const scrollX = useTransform(infoProgress, [0, 1], ["20%", "-40%"]);
 
   return (
-    <div className="min-h-screen bg-asphalt-dark text-white selection:bg-neon-green selection:text-black">
+    <div className="min-h-screen bg-asphalt-dark text-white selection:bg-neon-green selection:text-black" style={{ cursor: 'none' }}>
+      <RunnerCursor />
       <Navbar onOpenReg={() => setActiveModal('registration')} />
       
       <main>
