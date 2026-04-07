@@ -965,12 +965,16 @@ const RaceMapContent = () => {
         ))}
       </div>
 
-      <div className="aspect-video bg-black/50 border border-white/10 relative overflow-hidden group">
-         <img 
-           src="/assets/prague_map.png" 
-           className="absolute inset-0 w-full h-full object-cover saturate-50 brightness-[0.4]" 
-           alt="Prague Race Map"
-         />
+      <div className="aspect-video bg-[#0a0a0a] border border-white/10 relative overflow-hidden group">
+         {/* Clean Procedural Tactical Grid Background */}
+         <div 
+           className="absolute inset-0 opacity-20 pointer-events-none"
+           style={{ 
+             backgroundImage: 'linear-gradient(rgba(106, 249, 169, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(106, 249, 169, 0.15) 1px, transparent 1px)',
+             backgroundSize: '40px 40px',
+             backgroundPosition: 'center center'
+           }}
+         ></div>
          
          {/* Animated Path Overlay */}
          <svg 
