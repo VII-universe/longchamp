@@ -29,9 +29,9 @@ const RunnerCursor = () => {
       if (!rafRef.current) {
         rafRef.current = requestAnimationFrame(() => {
           if (wrapRef.current) {
-            // Offset 14px right and 16px below the cursor tip so native arrow stays visible
+            // Runner sits to the LEFT and BELOW the cursor tip
             wrapRef.current.style.transform =
-              `translate(${posRef.current.x + 14}px, ${posRef.current.y + 16}px)`;
+              `translate(${posRef.current.x - 60}px, ${posRef.current.y + 14}px)`;
           }
           rafRef.current = null;
         });
@@ -53,8 +53,8 @@ const RunnerCursor = () => {
         pointerEvents: 'none',
         zIndex: 99999,
         willChange: 'transform',
-        // Convert white Lottie figure to site neon green (#6AF9A9)
-        filter: 'brightness(0) saturate(100%) invert(82%) sepia(40%) saturate(500%) hue-rotate(105deg) brightness(1.05)',
+        // Precise CSS filter to hit exactly #6AF9A9 (from white Lottie figure)
+        filter: 'invert(84%) sepia(32%) saturate(1076%) hue-rotate(98deg) brightness(102%) contrast(97%)',
       }}
     >
       <DotLottieReact
