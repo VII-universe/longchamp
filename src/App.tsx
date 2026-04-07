@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { 
   Timer, 
@@ -13,6 +13,92 @@ import {
   List,
   ArrowRight
 } from 'lucide-react';
+
+// --- Custom Animated Runner Cursor ---
+
+const RunnerCursor = () => {
+  const pos = useRef({ x: -200, y: -200 });
+  const rafRef = useRef<number | null>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const move = (e: MouseEvent) => {
+      pos.current = { x: e.clientX, y: e.clientY };
+      if (!rafRef.current) {
+        rafRef.current = requestAnimationFrame(() => {
+          if (cursorRef.current) {
+            cursorRef.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px)`;
+          }
+          rafRef.current = null;
+        });
+      }
+    };
+    window.addEventListener('mousemove', move);
+    return () => window.removeEventListener('mousemove', move);
+  }, []);
+
+  return (
+    <div
+      ref={cursorRef}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        pointerEvents: 'none',
+        zIndex: 99999,
+        willChange: 'transform',
+        width: 0,
+        height: 0,
+      }}
+    >
+      {/* Runner SVG, offset so tip aligns with real cursor */}
+      <svg
+        viewBox="0 0 64 64"
+        width="48"
+        height="48"
+        style={{ position: 'absolute', top: -4, left: 2, filter: 'drop-shadow(0 0 6px #6AF9A9)' }}
+        fill="none"
+      >
+        {/* Head */}
+        <circle cx="32" cy="8" r="6" fill="#6AF9A9" />
+        {/* Body */}
+        <path d="M32 14 L32 34" stroke="#6AF9A9" strokeWidth="3" strokeLinecap="round" />
+        {/* Left arm animated */}
+        <motion.path
+          d="M32 20 L18 28"
+          stroke="#6AF9A9" strokeWidth="3" strokeLinecap="round"
+          animate={{ rotate: [0, 30, 0, -30, 0] }}
+          style={{ originX: '32px', originY: '20px' }}
+          transition={{ duration: 0.5, repeat: Infinity, ease: 'linear' }}
+        />
+        {/* Right arm animated */}
+        <motion.path
+          d="M32 20 L46 28"
+          stroke="#6AF9A9" strokeWidth="3" strokeLinecap="round"
+          animate={{ rotate: [0, -30, 0, 30, 0] }}
+          style={{ originX: '32px', originY: '20px' }}
+          transition={{ duration: 0.5, repeat: Infinity, ease: 'linear' }}
+        />
+        {/* Left leg animated */}
+        <motion.path
+          d="M32 34 L20 54"
+          stroke="#6AF9A9" strokeWidth="3" strokeLinecap="round"
+          animate={{ rotate: [0, 25, 0, -25, 0] }}
+          style={{ originX: '32px', originY: '34px' }}
+          transition={{ duration: 0.5, repeat: Infinity, ease: 'linear' }}
+        />
+        {/* Right leg animated */}
+        <motion.path
+          d="M32 34 L44 54"
+          stroke="#6AF9A9" strokeWidth="3" strokeLinecap="round"
+          animate={{ rotate: [0, -25, 0, 25, 0] }}
+          style={{ originX: '32px', originY: '34px' }}
+          transition={{ duration: 0.5, repeat: Infinity, ease: 'linear' }}
+        />
+      </svg>
+    </div>
+  );
+};
 
 // --- Helper Components ---
 
@@ -252,7 +338,8 @@ const App = () => {
   const scrollX = useTransform(infoProgress, [0, 1], ["20%", "-40%"]);
 
   return (
-    <div className="min-h-screen bg-asphalt-dark text-white selection:bg-neon-green selection:text-black">
+    <div className="min-h-screen bg-asphalt-dark text-white selection:bg-neon-green selection:text-black" style={{ cursor: 'none' }}>
+      <RunnerCursor />
       <Navbar onOpenReg={() => setActiveModal('registration')} />
       
       <main>
