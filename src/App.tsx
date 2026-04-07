@@ -139,7 +139,7 @@ const Hero = ({ onOpenReg, onOpenMap }: { onOpenReg: () => void; onOpenMap: () =
         <img 
           src="/assets/hero.png" 
           alt="Runner Runner" 
-          className="w-full h-full object-cover grayscale brightness-[0.5] contrast-[1.1]"
+          className="w-full h-full object-cover saturate-50 brightness-[0.5] contrast-[1.1]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-asphalt-dark via-asphalt-dark/80 to-transparent"></div>
         <div className="absolute inset-0 bg-asphalt-texture opacity-30"></div>
@@ -249,7 +249,7 @@ const App = () => {
                     >
                        <img 
                          src="/assets/enyaq.png" 
-                         className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 brightness-[0.5] group-hover:brightness-100 transition-all duration-1000" 
+                         className="w-full h-full object-cover object-center saturate-50 group-hover:saturate-100 brightness-[0.5] group-hover:brightness-100 transition-all duration-1000" 
                          alt="Skoda Enyaq Prize" 
                        />
                     </motion.div>
@@ -370,7 +370,7 @@ const App = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="relative group overflow-hidden bg-black h-[600px] border border-white/10">
                 <div className="absolute inset-0 z-0">
-                  <img src="/assets/ultra_race.png" className="w-full h-full object-cover grayscale brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Ultra 62k" />
+                  <img src="/assets/ultra_race.png" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Ultra 62k" />
                 </div>
                 <div className="absolute inset-0 bg-asphalt/40 z-10"></div>
                 <div className="relative z-30 h-full p-10 flex flex-col justify-end">
@@ -382,7 +382,7 @@ const App = () => {
 
               <div className="relative group overflow-hidden bg-black h-[600px] border border-white/10">
                 <div className="absolute inset-0 z-0">
-                  <img src="/assets/relay_race.png" className="w-full h-full object-cover grayscale brightness-[0.4] group-hover:scale-105 transition-transform duration-700" alt="Relay" />
+                  <img src="/assets/relay_race.png" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-[0.4] group-hover:scale-105 transition-transform duration-700" alt="Relay" />
                 </div>
                 <div className="absolute inset-0 bg-asphalt/60 z-10"></div>
                 <div className="relative z-30 h-full p-10 flex flex-col justify-end">
@@ -393,7 +393,7 @@ const App = () => {
 
               <div className="relative group overflow-hidden bg-black h-[600px] border border-white/10">
                 <div className="absolute inset-0 z-0">
-                  <img src="/assets/charity_run.png" className="w-full h-full object-cover grayscale brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Charity" />
+                  <img src="/assets/charity_run.png" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Charity" />
                 </div>
                 <div className="absolute inset-0 bg-neon-green/20 z-10"></div>
                 <div className="relative z-30 h-full p-10 flex flex-col justify-end">
@@ -472,7 +472,7 @@ const App = () => {
              >
                 <img 
                   src="/assets/expo_hall.png" 
-                  className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-1000" 
+                  className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:brightness-110 transition-all duration-1000" 
                   alt="Expo Hall" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-asphalt-dark via-asphalt-dark/60 to-transparent lg:block hidden z-10"></div>
@@ -501,7 +501,7 @@ const App = () => {
                >
                   <img 
                     src="/assets/merch_feature.png" 
-                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
+                    className="absolute inset-0 w-full h-full object-cover saturate-50 group-hover:saturate-100 transition-all duration-1000 group-hover:scale-105" 
                     alt="Survivor Merch Feature" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
@@ -528,7 +528,7 @@ const App = () => {
                         className="bg-white/5 border border-white/10 group overflow-hidden flex flex-col"
                       >
                         <div className="aspect-[4/3] bg-black overflow-hidden relative">
-                           <img src={item.img} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500" alt={item.name} />
+                           <img src={item.img} className="w-full h-full object-cover saturate-50 group-hover:saturate-100 group-hover:scale-110 transition-all duration-500" alt={item.name} />
                            <div className="absolute top-4 right-4 bg-neon-green text-black font-black px-2 py-1 text-[10px] uppercase skew-x-[-10deg]">{item.tag}</div>
                         </div>
                         <div className="p-6 flex-1 flex flex-col justify-between">
@@ -726,7 +726,7 @@ const RegistrationForm = () => {
     <div className="relative">
        {/* Background Decoration - Thematic Image */}
        <div 
-          className="absolute -top-12 -right-12 w-96 h-96 opacity-15 pointer-events-none grayscale brightness-[0.7]"
+          className="absolute -top-12 -right-12 w-96 h-96 opacity-15 pointer-events-none saturate-50 brightness-[0.7]"
           style={{ maskImage: 'radial-gradient(circle, black, transparent)', WebkitMaskImage: 'radial-gradient(circle, black, transparent)' }}
        >
           <img src="/assets/ultra_race.png" className="w-full h-full object-cover rounded-full" alt="" />
@@ -830,7 +830,7 @@ const RaceMapContent = () => {
       <div className="aspect-video bg-black/50 border border-white/10 relative overflow-hidden group">
          <img 
            src="/assets/prague_map.png" 
-           className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.4] group-hover:scale-105 transition-transform duration-[2000ms]" 
+           className="absolute inset-0 w-full h-full object-cover saturate-50 brightness-[0.4] group-hover:scale-105 transition-transform duration-[2000ms]" 
            alt="Prague Race Map"
          />
          
