@@ -1083,7 +1083,50 @@ const RaceMapContent = () => {
                  repeatType: "loop"
                }}
             />
-         </svg>
+                     
+            {/* Relay Point Marker (only for 31km) */}
+            {activeRoute === '31km' && (
+              <motion.g
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1 }}
+              >
+                {/* Outer Glow */}
+                <motion.circle
+                  cx="530"
+                  cy="850"
+                  r="15"
+                  fill="#6AF9A9"
+                  initial={{ opacity: 0.3, scale: 1 }}
+                  animate={{ opacity: [0.1, 0.4, 0.1], scale: [1, 1.4, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ filter: 'blur(8px)' }}
+                />
+                {/* Core Point */}
+                <circle
+                  cx="530"
+                  cy="850"
+                  r="6"
+                  fill="#6AF9A9"
+                  stroke="white"
+                  strokeWidth="2"
+                  style={{ filter: 'drop-shadow(0 0 10px #6AF9A9)' }}
+                />
+                {/* Label */}
+                <text
+                  x="550"
+                  y="855"
+                  fill="white"
+                  fontSize="14"
+                  fontWeight="bold"
+                  style={{ textShadow: '0 0 10px rgba(106, 249, 169, 0.8)' }}
+                  className="font-display italic"
+                >
+                  PŘEDÁVKA (31 KM)
+                </text>
+              </motion.g>
+            )}
+</svg>
 
          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
          <div className="absolute top-4 left-4 bg-black/80 p-4 border-l-4 border-neon-green backdrop-blur-md">
