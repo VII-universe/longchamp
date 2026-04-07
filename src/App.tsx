@@ -37,9 +37,8 @@ const Navbar = ({ onOpenReg }: { onOpenReg: () => void }) => {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/90 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-neon-green flex items-center justify-center font-display font-black text-black italic">LC</div>
-          <span className="font-display font-black text-2xl tracking-tighter italic">LONG<span className="text-neon-green underline">CHAMP</span></span>
+        <div className="flex items-center">
+          <img src="/assets/logo_2026.png" alt="Long Runners Champion 2026" className="h-10 lg:h-12 w-auto object-contain" />
         </div>
         
         {/* Desktop Menu */}
@@ -632,8 +631,8 @@ const App = () => {
       <footer className="bg-black py-12 border-t border-white/10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="font-display font-black text-2xl italic tracking-tighter">
-              LONG<span className="text-neon-green underline">CHAMP</span>
+            <div className="flex items-center justify-center md:justify-start">
+              <img src="/assets/logo_2026.png" alt="Long Runners Champion 2026" className="h-12 opacity-80 hover:opacity-100 transition-opacity drop-shadow-md grayscale hover:grayscale-0" />
             </div>
             <div className="flex gap-8 text-xs font-bold uppercase text-gray-500 tracking-widest">
               <button onClick={() => setActiveModal('registration')} className="hover:text-neon-green">Registrace</button>
