@@ -53,8 +53,7 @@ const RunnerCursor = () => {
         pointerEvents: 'none',
         zIndex: 99999,
         willChange: 'transform',
-        // Work from actual canvas render colors, not from forced black
-        filter: 'sepia(1) saturate(8) hue-rotate(95deg) brightness(1.25)',
+        filter: 'invert(84%) sepia(32%) saturate(1076%) hue-rotate(98deg) brightness(102%) contrast(97%)',
       }}
     >
       <DotLottieReact
