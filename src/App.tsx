@@ -138,9 +138,8 @@ const Hero = ({ onOpenReg, onOpenMap }: { onOpenReg: () => void; onOpenMap: () =
         <motion.img 
           src="/assets/hero.png" 
           alt="Runner Runner" 
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.05 }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse', ease: "linear" }}
+          animate={{ scale: [1, 1.08, 1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="w-full h-full object-cover saturate-50 brightness-[0.5] contrast-[1.1]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-asphalt-dark via-asphalt-dark/80 to-transparent"></div>
