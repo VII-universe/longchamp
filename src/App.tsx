@@ -31,7 +31,7 @@ const RunnerCursor = () => {
           if (wrapRef.current) {
             // Runner sits to the LEFT and BELOW the cursor tip
             wrapRef.current.style.transform =
-              `translate(${posRef.current.x - 60}px, ${posRef.current.y + 14}px)`;
+              `translate(${posRef.current.x - 30}px, ${posRef.current.y + 8}px)`;
           }
           rafRef.current = null;
         });
@@ -963,16 +963,18 @@ const RegistrationForm = () => {
 const routesData = {
   '5km': {
     title: 'MAPA TRASY 5 KM CHARITA',
-    pathAnimation: { end: 0.08, duration: 2 },
+    path: "M500,450 L520,440 L550,460 L580,500 L550,540 L520,560 L500,550 L480,560 L450,540 L420,500 L450,460 L480,440 Z",
+    pathAnimation: { duration: 3 },
     checkpoints: [
-      { name: 'CP1 - START/CÍL (HOLEŠOVICE)', km: '2.5 KM', info: 'Voda, Iontový nápoj, Zdravotník' },
+      { name: 'CP1 - START/CÍL (HOLEŠOVICE)', km: '0 KM / 5 KM', info: 'Voda, Iontový nápoj, Zdravotník' },
     ],
     specs: { elevation: '45 M+', surface: '100% ASFALT / DLAŽBA', limit: '1:00 HOD', category: 'CHARITA' },
     warning: 'Pozor: Charitativní běh vede částečně přes Stromovku. Trasa je rovinatá a vhodná pro všechny.'
   },
   '31km': {
     title: 'MAPA TRASY 31+31 KM ŠTAFETA',
-    pathAnimation: { end: 0.5, duration: 4 },
+    path: "M500,200 L650,300 L750,500 L650,700 L500,800 L350,700 L250,500 L350,300 Z",
+    pathAnimation: { duration: 5 },
     checkpoints: [
       { name: 'CP1 - PETŘÍN HILL', km: '12 KM', info: 'Voda, Ionty, Gely, Zdravotník' },
       { name: 'CP2 - VYŠEHRAD (PŘEDÁVKA)', km: '31 KM', info: 'Banány, Vývar, Masáže, Předávková zóna' },
@@ -982,7 +984,8 @@ const routesData = {
   },
   '62km': {
     title: 'MAPA TRASY 62 KM ULTRA',
-    pathAnimation: { end: 1, duration: 6 },
+    path: "M500,100 L700,200 L850,400 L800,650 L650,850 L500,950 L350,850 L200,650 L150,400 L300,200 Z",
+    pathAnimation: { duration: 8 },
     checkpoints: [
       { name: 'CP1 - PETŘÍN HILL', km: '12 KM', info: 'Voda, Ionty, Gely, Zdravotník' },
       { name: 'CP2 - VYŠEHRAD FORTRESS', km: '28 KM', info: 'Banány, Vývar, Teplý čaj, Masáže' },
@@ -1022,12 +1025,19 @@ const RaceMapContent = () => {
       </div>
 
       <div className="aspect-video bg-[#0a0a0a] border border-white/10 relative overflow-hidden group">
-         {/* Clean Procedural Tactical Grid Background */}
+         {/* Background Image: Prague Map */}
+         <img 
+           src="/assets/prague_map.png" 
+           alt="Prague Map" 
+           className="absolute inset-0 w-full h-full object-cover opacity-90 brightness-75"
+         />
+
+         {/* Tactical Grid Background */}
          <div 
-           className="absolute inset-0 opacity-20 pointer-events-none"
+           className="absolute inset-0 opacity-15 pointer-events-none"
            style={{ 
-             backgroundImage: 'linear-gradient(rgba(106, 249, 169, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(106, 249, 169, 0.15) 1px, transparent 1px)',
-             backgroundSize: '40px 40px',
+             backgroundImage: 'linear-gradient(rgba(106, 249, 169, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(106, 249, 169, 0.1) 1px, transparent 1px)',
+             backgroundSize: '30px 30px',
              backgroundPosition: 'center center'
            }}
          ></div>
@@ -1035,19 +1045,19 @@ const RaceMapContent = () => {
          {/* Animated Path Overlay */}
          <svg 
            viewBox="0 0 1000 1000" 
-           className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_0_15px_rgba(106,249,169,0.8)] opacity-70"
-           preserveAspectRatio="none"
+           className="absolute inset-0 w-full h-full pointer-events-none"
+           preserveAspectRatio="xMidYMid meet"
          >
             <motion.path
                key={`glow-${activeRoute}`}
-               d="M500,250 L520,240 L550,220 L600,230 L640,200 L700,220 L750,280 L720,350 L680,450 L650,550 L630,680 L580,750 L520,850 L450,920 L380,850 L320,750 L280,650 L250,550 L220,450 L180,350 L150,280 L200,220 L250,230 L350,220 L450,240 Z"
+               d={route.path}
                fill="none"
                stroke="#6AF9A9"
-               strokeWidth="15"
+               strokeWidth="8"
                strokeLinecap="round"
                strokeLinejoin="round"
                initial={{ pathLength: 0, opacity: 0 }}
-               animate={{ pathLength: route.pathAnimation.end, opacity: 1 }}
+               animate={{ pathLength: 1, opacity: 1 }}
                transition={{ 
                 duration: route.pathAnimation.duration, 
                 ease: "linear",
@@ -1059,24 +1069,23 @@ const RaceMapContent = () => {
             {/* Bright leading edge */}
             <motion.path
                key={`edge-${activeRoute}`}
-               d="M500,250 L520,240 L550,220 L600,230 L640,200 L700,220 L750,280 L720,350 L680,450 L650,550 L630,680 L580,750 L520,850 L450,920 L380,850 L320,750 L280,650 L250,550 L220,450 L180,350 L150,280 L200,220 L250,230 L350,220 L450,240 Z"
+               d={route.path}
                fill="none"
                stroke="white"
-               strokeWidth="4"
+               strokeWidth="3"
                strokeLinecap="round"
                initial={{ pathLength: 0, opacity: 0 }}
-               animate={{ pathLength: route.pathAnimation.end, opacity: 1 }}
+               animate={{ pathLength: 0.08, pathOffset: [0, 1] }}
                transition={{ 
-                duration: route.pathAnimation.duration, 
-                ease: "linear",
-                repeat: Infinity,
-                repeatType: "loop",
-                delay: 0.5
-              }}
+                 duration: route.pathAnimation.duration, 
+                 ease: "linear",
+                 repeat: Infinity,
+                 repeatType: "loop"
+               }}
             />
          </svg>
 
-         <div className="absolute inset-0 bg-gradient-to-t from-asphalt-dark/90 to-transparent pointer-events-none"></div>
+         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
          <div className="absolute top-4 left-4 bg-black/80 p-4 border-l-4 border-neon-green backdrop-blur-md">
             <h4 className="text-sm font-black uppercase text-white tracking-widest">{route.title}</h4>
             <p className="text-[10px] text-neon-green font-bold uppercase italic animate-pulse">AKTIVNÍ SIMULACE BĚHU...</p>
