@@ -10,7 +10,8 @@ import {
   Menu,
   X,
   CheckCircle2,
-  List
+  List,
+  ArrowRight
 } from 'lucide-react';
 
 // --- Helper Components ---
@@ -226,6 +227,102 @@ const App = () => {
           onOpenReg={() => setActiveModal('registration')} 
           onOpenMap={() => setActiveModal('map')} 
         />
+        
+        {/* Professional Prize Teaser Showcase */}
+        <section className="relative h-[480px] lg:h-[400px] overflow-hidden bg-asphalt border-y border-white/5 group transition-colors duration-700 hover:bg-black">
+          <div className="flex flex-col lg:flex-row h-full">
+             {/* Visual Panel - Cinematic Display */}
+             <div className="lg:w-[65%] relative h-full overflow-hidden">
+                <motion.div 
+                  initial={{ scale: 1.1, x: 20 }}
+                  whileInView={{ scale: 1, x: 0 }}
+                  transition={{ duration: 2, ease: "easeOut" }}
+                  className="w-full h-full"
+                >
+                   <img 
+                     src="/assets/enyaq.png" 
+                     className="w-full h-full object-cover lg:object-[center_20%] grayscale group-hover:grayscale-0 brightness-[0.4] group-hover:brightness-90 transition-all duration-1000" 
+                     alt="Skoda Enyaq Prize" 
+                   />
+                </motion.div>
+                
+                {/* Diagonal Mask Overlay */}
+                <div className="absolute inset-0 bg-asphalt-dark/20 z-10 lg:block hidden" style={{ clipPath: 'polygon(90% 0, 100% 0, 100% 100%, 75% 100%)' }}></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-asphalt-dark via-asphalt-dark/40 to-transparent z-10"></div>
+                
+                {/* Technical Specifications Overlay */}
+                <div className="absolute bottom-8 left-8 lg:left-12 z-20 flex gap-10">
+                   {[
+                     { label: 'RANGE', value: '540 KM', unit: 'WLTP' },
+                     { label: 'BATTERY', value: '82 KWH', unit: 'NET' },
+                     { label: 'POWER', value: '210 KW', unit: 'MAX' }
+                   ].map((spec, i) => (
+                     <motion.div 
+                       key={i}
+                       initial={{ opacity: 0, y: 20 }}
+                       whileInView={{ opacity: 1, y: 0 }}
+                       transition={{ delay: 0.5 + (i * 0.1) }}
+                       className="space-y-1"
+                     >
+                        <p className="text-[9px] font-black text-neon-green/60 tracking-widest uppercase">{spec.label}</p>
+                        <p className="text-xl font-display font-black italic text-white flex items-baseline gap-1">
+                          {spec.value} <span className="text-[10px] text-white/30 not-italic">{spec.unit}</span>
+                        </p>
+                     </motion.div>
+                   ))}
+                </div>
+
+                {/* Decorative Background Text */}
+                <div className="absolute top-1/2 left-10 -translate-y-1/2 opacity-[0.04] pointer-events-none uppercase font-display font-black text-[18vw] italic leading-none select-none z-0">
+                   ENYAQ
+                </div>
+             </div>
+
+             {/* Action Panel - Brutalist Card */}
+             <div className="lg:w-[35%] bg-asphalt-dark relative flex flex-col justify-center p-8 lg:p-16 border-l border-white/5 z-20">
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className="space-y-6"
+                >
+                   <div className="inline-flex items-center gap-3">
+                      <div className="w-12 h-[2px] bg-neon-green"></div>
+                      <span className="text-neon-green font-black uppercase text-[10px] tracking-[0.3em]">HLAVNÍ CENA</span>
+                   </div>
+                   
+                   <div className="space-y-2">
+                      <h2 className="text-4xl lg:text-6xl font-display font-black italic uppercase leading-[0.9] tracking-tighter">
+                         VYHRAJ <br /> 
+                         <span className="text-transparent" style={{ WebkitTextStroke: '1px white' }}>ŠKODU</span> <br />
+                         <span className="text-neon-green">ENYAQ</span>
+                      </h2>
+                   </div>
+
+                   <p className="text-gray-400 text-xs font-bold uppercase tracking-widest leading-relaxed max-w-xs">
+                      Staň se absolutním šampionem LRC 2026 a odvez si domů vrchol elektrotechnologie.
+                   </p>
+
+                   <button 
+                     onClick={() => document.getElementById('prize')?.scrollIntoView({ behavior: 'smooth' })}
+                     className="group/btn flex items-center gap-6 bg-white/5 border border-white/10 hover:border-neon-green p-1 pr-6 transition-all"
+                   >
+                      <div className="w-12 h-12 bg-white flex items-center justify-center text-black group-hover/btn:bg-neon-green transition-colors">
+                         <ArrowRight size={20} />
+                      </div>
+                      <span className="text-xs font-black uppercase tracking-widest">ZOBRAZIT SPECIFIKACI</span>
+                   </button>
+                </motion.div>
+
+                {/* Vertical Branding */}
+                <div className="absolute right-0 top-0 bottom-0 w-12 border-l border-white/5 flex items-center justify-center pointer-events-none overflow-hidden">
+                   <span className="rotate-90 whitespace-nowrap text-[8px] font-black tracking-[1em] text-white/10 uppercase">
+                      LONG RUNNERS CHAMPION 2026 — LONG RUNNERS CHAMPION 2026
+                   </span>
+                </div>
+             </div>
+          </div>
+        </section>
         
         {/* Basic Info */}
         <section id="info" ref={infoRef} className="py-32 bg-asphalt section-stars relative overflow-hidden">
