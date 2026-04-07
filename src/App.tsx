@@ -823,9 +823,10 @@ const RegistrationForm = () => {
           <h3 className="text-3xl md:text-4xl font-display font-black italic uppercase mb-6 leading-none">VSTUP DO <br/><span className="text-neon-green">HISTORIE</span></h3>
           
           <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className={`grid grid-cols-1 gap-4 ${selectedCategory === '31+31 KM ŠTAFETA' ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
                {[
-                  { id: 'name', label: 'Jméno a Příjmení', type: 'text', placeholder: 'JAKUB BĚŽEC' },
+                  { id: 'name', label: selectedCategory === '31+31 KM ŠTAFETA' ? 'Závodník 1 - Jméno' : 'Jméno a Příjmení', type: 'text', placeholder: 'JAKUB BĚŽEC' },
+                  ...(selectedCategory === '31+31 KM ŠTAFETA' ? [{ id: 'name2', label: 'Závodník 2 - Jméno', type: 'text', placeholder: 'PETR PARŤÁK' }] : []),
                   { id: 'email', label: 'Emailová adresa', type: 'email', placeholder: 'JAKUB@CHAMPION.CZ' },
                ].map((field, i) => (
                  <motion.div 
