@@ -1222,7 +1222,7 @@ const MerchOrderContent = ({ item }: { item: any }) => {
        {/* Product Detail */}
        <div className="space-y-8">
           <div className="aspect-square bg-black border border-white/10 relative overflow-hidden group">
-             <img src="/assets/merch_feature.webp" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={item.name}  loading="lazy" />
+             <img src={item.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={item.name} loading="lazy" />
              <div className="absolute top-4 left-4 bg-neon-green text-black font-black px-4 py-2 skew-x-[-10deg] italic">
                 {item.price}
              </div>
