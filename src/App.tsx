@@ -90,7 +90,7 @@ const Navbar = ({ onOpenReg }: { onOpenReg: () => void }) => {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/90 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center">
-          <img src="/assets/logo_2026.png" alt="Long Runners Champion 2026" className="h-10 lg:h-12 w-auto object-contain" />
+          <img src="/assets/logo_2026.webp" alt="Long Runners Champion 2026" className="h-10 lg:h-12 w-auto object-contain"  loading="lazy" />
         </div>
         
         {/* Desktop Menu */}
@@ -109,7 +109,7 @@ const Navbar = ({ onOpenReg }: { onOpenReg: () => void }) => {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <button className="md:hidden text-white" aria-label="Otevřít menu" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
         </button>
       </div>
@@ -188,11 +188,12 @@ const Hero = ({ onOpenReg, onOpenMap }: { onOpenReg: () => void; onOpenMap: () =
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <motion.img 
-          src="/assets/hero.png" 
-          alt="Runner Runner" 
+          src="/assets/hero.webp"
+          fetchPriority="high"
+          alt="Běžec na ultra-maratonu Long Runners Champion 2026 v Praze"
           animate={{ scale: [1, 1.08, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="w-full h-full object-cover saturate-50 brightness-[0.5] contrast-[1.1]"
+          className="w-full h-full object-cover saturate-100 brightness-100 contrast-[1.1]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-asphalt-dark via-asphalt-dark/80 to-transparent"></div>
         <div className="absolute inset-0 bg-asphalt-texture opacity-30"></div>
@@ -334,10 +335,10 @@ const App = () => {
                       className="w-full h-full"
                     >
                        <img 
-                         src="/assets/enyaq.png" 
+                         src="/assets/enyaq.webp" 
                          className="w-full h-full object-cover object-center saturate-50 group-hover:saturate-100 brightness-[0.5] group-hover:brightness-100 transition-all duration-1000" 
                          alt="Skoda Enyaq Prize" 
-                       />
+                        loading="lazy" />
                     </motion.div>
                     
                     <div className="absolute inset-0 bg-gradient-to-r from-asphalt/40 via-transparent to-transparent z-10 pointer-events-none"></div>
@@ -471,7 +472,7 @@ const App = () => {
                  className="relative group overflow-hidden bg-black h-[600px] border border-white/10"
               >
                 <div className="absolute inset-0 z-0">
-                  <img src="/assets/ultra_race.png" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Ultra 62k" />
+                  <img src="/assets/ultra_race.webp" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Ultra 62k"  loading="lazy" />
                 </div>
                 <div className="absolute inset-0 bg-asphalt/40 z-10"></div>
                 <div className="relative z-30 h-full p-10 flex flex-col justify-end">
@@ -489,7 +490,7 @@ const App = () => {
                  className="relative group overflow-hidden bg-black h-[600px] border border-white/10"
               >
                 <div className="absolute inset-0 z-0">
-                  <img src="/assets/relay_race.png" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-[0.4] group-hover:scale-105 transition-transform duration-700" alt="Relay" />
+                  <img src="/assets/relay_race.webp" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-[0.4] group-hover:scale-105 transition-transform duration-700" alt="Relay"  loading="lazy" />
                 </div>
                 <div className="absolute inset-0 bg-asphalt/60 z-10"></div>
                 <div className="relative z-30 h-full p-10 flex flex-col justify-end">
@@ -506,7 +507,7 @@ const App = () => {
                  className="relative group overflow-hidden bg-black h-[600px] border border-white/10"
               >
                 <div className="absolute inset-0 z-0">
-                  <img src="/assets/charity_run.png" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Charity" />
+                  <img src="/assets/charity_run.webp" className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:scale-105 transition-transform duration-700" alt="Charity"  loading="lazy" />
                 </div>
                 <div className="absolute inset-0 bg-neon-green/20 z-10"></div>
                 <div className="relative z-30 h-full p-10 flex flex-col justify-end">
@@ -604,10 +605,10 @@ const App = () => {
                className="w-full h-full relative"
              >
                 <img 
-                  src="/assets/expo_hall.png" 
+                  src="/assets/expo_hall.webp" 
                   className="w-full h-full object-cover saturate-50 group-hover:saturate-100 brightness-50 group-hover:brightness-110 transition-all duration-1000" 
                   alt="Expo Hall" 
-                />
+                 loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-r from-asphalt-dark via-asphalt-dark/60 to-transparent lg:block hidden z-10"></div>
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
              </motion.div>
@@ -633,10 +634,10 @@ const App = () => {
                  className="lg:w-1/3 h-[400px] lg:h-auto min-h-[500px] bg-black relative group overflow-hidden border border-white/10"
                >
                   <img 
-                    src="/assets/merch_feature.png" 
+                    src="/assets/merch_feature.webp" 
                     className="absolute inset-0 w-full h-full object-cover saturate-50 group-hover:saturate-100 transition-all duration-1000 group-hover:scale-105" 
                     alt="Survivor Merch Feature" 
-                  />
+                   loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
                   <div className="absolute bottom-8 left-8 right-8">
                      <p className="text-neon-green font-black uppercase tracking-widest mb-2">COLLECTION 2026</p>
@@ -648,10 +649,10 @@ const App = () => {
                <div className="lg:w-2/3">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {[
-                      { name: 'Survivor Tee', price: '890 Kč', tag: 'Elite', img: '/assets/merch_tee.png', info: 'Funkční triko s antibakteriální úpravou a reflexními prvky.' },
-                      { name: 'Finisher Hoodie', price: '1 590 Kč', tag: 'Preorder', img: '/assets/merch_hoodie.png', info: 'Těžká gramáž, vnitřní počes, neonové výšivky.' },
-                      { name: 'Race Cap', price: '450 Kč', tag: 'Pro', img: '/assets/merch_cap.png', info: 'Ultra lehká, s odvětráváním a stavitelným páskem.' },
-                      { name: 'Training Vest', price: '1 290 Kč', tag: 'New', img: '/assets/merch_vest.png', info: 'Větruodolná, s kapsou na mobil a gely.' },
+                      { name: 'Survivor Tee', price: '890 Kč', tag: 'Elite', img: '/assets/merch_tee.webp', info: 'Funkční triko s antibakteriální úpravou a reflexními prvky.' },
+                      { name: 'Finisher Hoodie', price: '1 590 Kč', tag: 'Preorder', img: '/assets/merch_hoodie.webp', info: 'Těžká gramáž, vnitřní počes, neonové výšivky.' },
+                      { name: 'Race Cap', price: '450 Kč', tag: 'Pro', img: '/assets/merch_cap.webp', info: 'Ultra lehká, s odvětráváním a stavitelným páskem.' },
+                      { name: 'Training Vest', price: '1 290 Kč', tag: 'New', img: '/assets/merch_vest.webp', info: 'Větruodolná, s kapsou na mobil a gely.' },
                     ].map((item, i) => (
                       <motion.div 
                         key={i}
@@ -662,7 +663,7 @@ const App = () => {
                         className="bg-white/5 border border-white/10 group overflow-hidden flex flex-col"
                       >
                         <div className="aspect-[4/3] bg-black overflow-hidden relative">
-                           <img src={item.img} className="w-full h-full object-cover saturate-50 group-hover:saturate-100 group-hover:scale-110 transition-all duration-500" alt={item.name} />
+                           <img src={item.img} className="w-full h-full object-cover saturate-50 group-hover:saturate-100 group-hover:scale-110 transition-all duration-500" alt={item.name}  loading="lazy" />
                            <div className="absolute top-4 right-4 bg-neon-green text-black font-black px-2 py-1 text-[10px] uppercase skew-x-[-10deg]">{item.tag}</div>
                         </div>
                         <div className="p-6 flex-1 flex flex-col justify-between">
@@ -719,10 +720,10 @@ const App = () => {
                className="w-full h-full relative"
              >
                 <img 
-                  src="/assets/enyaq.png" 
+                  src="/assets/enyaq.webp" 
                   className="w-full h-full object-cover transition-all duration-700" 
                   alt="Skoda Enyaq Full Color" 
-                />
+                 loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10"></div>
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10"></div>
              </motion.div>
@@ -768,7 +769,7 @@ const App = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center justify-center md:justify-start">
-              <img src="/assets/logo_2026.png" alt="Long Runners Champion 2026" className="h-12 opacity-80 hover:opacity-100 transition-opacity drop-shadow-md grayscale hover:grayscale-0" />
+              <img src="/assets/logo_2026.webp" alt="Long Runners Champion 2026" className="h-12 opacity-80 hover:opacity-100 transition-opacity drop-shadow-md grayscale hover:grayscale-0"  loading="lazy" />
             </div>
             <div className="flex gap-8 text-xs font-bold uppercase text-gray-500 tracking-widest">
               <button onClick={() => setActiveModal('registration')} className="hover:text-neon-green">Registrace</button>
@@ -832,7 +833,7 @@ const Modal = ({ title, close, children }: { title: string; close: () => void; c
       >
         <div className="p-6 border-b border-white/10 flex justify-between items-center">
           <h2 className="text-3xl font-display font-black italic uppercase tracking-tighter">{title}</h2>
-          <button onClick={close} className="p-2 hover:bg-neon-green hover:text-black transition-all">
+          <button onClick={close} aria-label="Zavřít" className="p-2 hover:bg-neon-green hover:text-black transition-all">
             <X size={32} />
           </button>
         </div>
@@ -864,7 +865,7 @@ const RegistrationForm = () => {
           className="absolute -top-12 -right-12 w-96 h-96 opacity-15 pointer-events-none saturate-50 brightness-[0.7]"
           style={{ maskImage: 'radial-gradient(circle, black, transparent)', WebkitMaskImage: 'radial-gradient(circle, black, transparent)' }}
        >
-          <img src="/assets/ultra_race.png" className="w-full h-full object-cover rounded-full" alt="" />
+          <img src="/assets/ultra_race.webp" className="w-full h-full object-cover rounded-full" alt="" aria-hidden="true" loading="lazy" />
        </div>
 
        <div className="relative z-10">
@@ -1027,10 +1028,10 @@ const RaceMapContent = () => {
       <div className="aspect-video bg-[#0a0a0a] border border-white/10 relative overflow-hidden group">
          {/* Background Image: Prague Map */}
          <img 
-           src="/assets/prague_map.png" 
+           src="/assets/prague_map.webp" 
            alt="Prague Map" 
            className="absolute inset-0 w-full h-full object-cover opacity-90 brightness-75"
-         />
+          loading="lazy" />
 
          {/* Tactical Grid Background */}
          <div 
@@ -1221,7 +1222,7 @@ const MerchOrderContent = ({ item }: { item: any }) => {
        {/* Product Detail */}
        <div className="space-y-8">
           <div className="aspect-square bg-black border border-white/10 relative overflow-hidden group">
-             <img src="/assets/merch_feature.png" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={item.name} />
+             <img src="/assets/merch_feature.webp" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={item.name}  loading="lazy" />
              <div className="absolute top-4 left-4 bg-neon-green text-black font-black px-4 py-2 skew-x-[-10deg] italic">
                 {item.price}
              </div>
