@@ -374,7 +374,7 @@ const App = () => {
                        <div className="space-y-1">
                           <h2 className="text-4xl lg:text-5xl font-display font-black italic uppercase leading-[0.95] tracking-tighter">
                              VYHRAJ <br /> 
-                             <span className="text-neon-green">ŠKODU ENYAQ</span>
+                             <span className="text-neon-green">LONG RANGE CHAMPION ŠKODA ENYAQ</span>
                           </h2>
                        </div>
 
@@ -700,7 +700,7 @@ const App = () => {
               className="max-w-6xl mx-auto"
             >
               <h2 className="text-6xl md:text-9xl font-display font-black italic mb-4 uppercase leading-[0.8]">VÝHRA PRO <br />ŠAMPIONA</h2>
-              <p className="text-sm font-black uppercase tracking-[0.4em] text-black/60">HLAVNÍ CENA ZÁVODU: ŠKODA ENYAQ DO VLASTNICTVÍ</p>
+              <p className="text-sm font-black uppercase tracking-[0.4em] text-black/60">HLAVNÍ CENA ZÁVODU: LONG RANGE CHAMPION ŠKODA ENYAQ</p>
             </motion.div>
           </div>
 
