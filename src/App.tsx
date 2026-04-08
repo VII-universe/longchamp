@@ -188,14 +188,14 @@ const Hero = ({ onOpenReg, onOpenMap }: { onOpenReg: () => void; onOpenMap: () =
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <motion.img 
-          src="/assets/hero.webp"
+          src="/assets/runners.webp"
           fetchPriority="high"
-          alt="Běžec na ultra-maratonu Long Runners Champion 2026 v Praze"
+          alt="Vyčerpaní běžci v cíli ultra-maratonu"
           animate={{ scale: [1, 1.08, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="w-full h-full object-cover saturate-100 brightness-100 contrast-[1.1]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-asphalt-dark via-asphalt-dark/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-asphalt-dark/80 via-asphalt-dark/40 to-transparent"></div>
         <div className="absolute inset-0 bg-asphalt-texture opacity-30"></div>
       </div>
 
