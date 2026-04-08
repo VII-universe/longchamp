@@ -700,7 +700,7 @@ const App = () => {
               className="max-w-6xl mx-auto"
             >
               <h2 className="text-6xl md:text-9xl font-display font-black italic mb-4 uppercase leading-[0.8]">VÝHRA PRO <br />ŠAMPIONA</h2>
-              <p className="text-sm font-black uppercase tracking-[0.4em] text-black/60">HLAVNÍ CENA ZÁVODU: ŠKODA ENYAQ NA CELÝ ROK</p>
+              <p className="text-sm font-black uppercase tracking-[0.4em] text-black/60">HLAVNÍ CENA ZÁVODU: ŠKODA ENYAQ NAPOŘÁD</p>
             </motion.div>
           </div>
 
@@ -750,7 +750,7 @@ const App = () => {
           <div className="container mx-auto px-6 relative z-10 text-center">
              <div className="max-w-2xl mx-auto mb-12">
                 <p className="text-lg font-bold uppercase tracking-tight leading-relaxed">
-                   Elektromobilita ladí s čistým během. Vítěz ultra-maratonu v kategorii ELITE získá roční zápůjčku tohoto špičkového modelu, který definuje budoucnost dopravy.
+                   Elektromobilita ladí s čistým během. Vítěz ultra-maratonu v kategorii ELITE získá tento špičkový model, který definuje budoucnost dopravy, do svého trvalého vlastnictví.
                 </p>
              </div>
              
